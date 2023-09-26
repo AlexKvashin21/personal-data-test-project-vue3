@@ -29,9 +29,7 @@ import ChildrenForm from "../components/ChildrenForm.vue";
 
 const personalData = ref({name: '', age: ''})
 
-const children = ref([
-    {name: '', age: ''},
-])
+const children = ref([])
 
 if (localStorage.getItem('personal_data') && localStorage.getItem('children_data')) {
     personalData.value = JSON.parse(localStorage.getItem('personal_data'))

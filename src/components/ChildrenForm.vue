@@ -1,7 +1,7 @@
 <template>
     <div class="children-form">
         <div class="children-form__top">
-            <div class="children-form__title">
+            <div class="children-form__title" v-if="children.length">
                 Дети (Макс 5)
             </div>
             <button class="btn-reverse" v-if="children.length < 5" @click="emit('add-child')">

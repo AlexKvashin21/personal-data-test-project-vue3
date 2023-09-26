@@ -1,0 +1,72 @@
+:root {
+  --primary-color: rgba(1, 167, 253, 1);
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+a:-webkit-any-link {
+  text-decoration: none;
+  color: rgba(17, 17, 17, 0.48);
+}
+
+.btn {
+  padding: 10px 20px 10px 20px;
+  border-radius: 100px;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+
+  cursor: pointer;
+
+  transition: all .3s;
+
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  flex-wrap: nowrap;
+
+  &:hover {
+    background-color: #fff;
+    color: var(--primary-color);
+  }
+
+  >span {
+    font-size: 30px;
+  }
+}
+
+.btn-reverse {
+  padding: 10px 20px 10px 20px;
+  border-radius: 100px;
+  background-color: #fff;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+
+  cursor: pointer;
+
+  transition: all .3s;
+
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  flex-wrap: nowrap;
+
+  &:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+
+  >span {
+    font-size: 30px;
+  }
+}

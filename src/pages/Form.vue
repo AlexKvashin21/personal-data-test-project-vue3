@@ -59,9 +59,11 @@ function validation() {
     if (parseInt(personalData.value.age) != personalData.value.age || !personalData.value.age.length || personalData.value.age.length > 2 || !personalData.value.name.length) {
         return false
     }
-    for (let child of children.value) {
-        if (!child.name.length || !child.age.length || child.age.length > 2 || parseInt(child.age) != child.age) {
-            return false
+    if (children.value.length) {
+        for (let child of children.value) {
+            if (!child.name.length || !child.age.length || child.age.length > 2 || parseInt(child.age) != child.age) {
+                return false
+            }
         }
     }
     return true

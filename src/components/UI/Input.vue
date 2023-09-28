@@ -4,8 +4,8 @@
         <input
             :value="value"
             @input="updateValue"
-            placeholder="..."
-            type="text"
+            :type="type"
+            :placeholder="placeholder"
         >
     </div>
 
@@ -17,6 +17,15 @@ const props = defineProps({
         required: true
     },
     name: String,
+    type: {
+        required: false,
+        default: 'text',
+        type: String
+    },
+    placeholder: {
+        required: false,
+        default: '...'
+    }
 });
 
 const emit = defineEmits(['update:value']);
@@ -48,6 +57,16 @@ const updateValue = (event) => {
         font-weight: 400;
         line-height: 24px;
         width: 100%;
+    }
+
+    > input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    > input[type=number] {
+        -moz-appearance: textfield;
     }
 }
 

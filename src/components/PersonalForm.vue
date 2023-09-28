@@ -4,34 +4,27 @@
             Персональные данные
         </div>
         <div class="personal-form__inputs">
-            <Input :value="name" @update:value="updateName($event)" name="Имя"/>
-            <Input :value="age" @update:value="updateAge($event)" name="Возраст"/>
+            <Input :value="personalData.name" @update:value="updateName" name="Имя"/>
+            <Input :value="personalData.age" @update:value="updateAge" name="Возраст" type="number"/>
         </div>
     </div>
 </template>
 
 <script setup>
 import Input from "./UI/Input.vue";
+import {useStore} from "vuex";
+import {computed} from "vue";
 
-const props = defineProps({
-    name: {
-        required: true,
-        type: String
-    },
-    age: {
-        required: true,
-        type: String
-    }
-})
+const store = useStore()
 
-const emit = defineEmits(['update:name', 'update:age']);
+const personalData = computed(() => store.state.personalData)
 
-const updateName = (event) => {
-    emit('update:name', event);
+function updateName(name) {
+    store.commit('changePersonalName', name)
 }
 
-const updateAge = (event) => {
-    emit('update:age', event);
+function updateAge(age) {
+    store.commit('changePersonalAge', age)
 }
 
 </script>

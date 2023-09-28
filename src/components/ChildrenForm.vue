@@ -4,42 +4,45 @@
             <div class="children-form__title" v-if="children.length">
                 Дети (Макс 5)
             </div>
-            <button class="btn-reverse" v-if="children.length < 5" @click="emit('add-child')">
+            <button class="btn-reverse" v-if="children.length < 5" @click="addChild">
                 <span>&plus;</span>  Добавить ребенка
             </button>
         </div>
-        <div class="children-form__inputs">
-            <div v-for="(child) in localChildren" class="children-form__input-row">
-                <Input :value="child.name" @update:value="child.name = $event" name="Имя" style="width: 100%"/>
-                <Input :value="child.age" @update:value="child.age = $event" name="Возраст" style="width: 100%"/>
-                <span class="children-form__input-delete" @click="emit('remove-child')">Удалить</span>
+        <div class="children-form__inputs" v-if="children.length">
+            <div v-for="(child, index) in children" :key="child.id" class="children-form__input-row">
+                <Input :value="child.name" @update:value="updateName($event, index)" name="Имя" style="width: 100%"/>
+                <Input :value="child.age" @update:value="updateAge($event, index)" name="Возраст" type="number" style="width: 100%"/>
+                <span class="children-form__input-delete" @click="deleteChild(child.id)">Удалить</span>
             </div>
         </div>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Input from "./UI/Input.vue";
-import {ref, watch} from "vue";
+import {useStore} from "vuex";
+import {computed} from "vue";
 
-const props = defineProps({
-    children: {
-        required: true,
-        type: Array
-    },
-})
+const store = useStore()
 
-const emit = defineEmits(['update:children', 'add-child', 'remove-child']);
 
-const localChildren = ref(props.children)
+const children = computed(() => store.state.childrenData)
 
-const updateChildren = (event) => {
-    emit('update:children', event);
+function updateName(name, index) {
+    store.commit('changeChildName', {name: name, index: index})
 }
 
-watch(localChildren.value, (newValue) => {
-    updateChildren(newValue)
-});
+function updateAge(age, index) {
+    store.commit('changeChildAge', {age: age, index: index})
+}
+
+function deleteChild(id) {
+    store.commit('removeChild', id)
+}
+
+function addChild() {
+    store.commit('addChild')
+}
 
 </script>
 

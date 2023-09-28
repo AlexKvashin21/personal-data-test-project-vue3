@@ -26,15 +26,15 @@
 
 <script setup>
 import Layout from "../components/Layout.vue";
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import {useStore} from "vuex";
 
-const personalData = ref(null)
-
-const children = ref(null)
+const store = useStore()
+const personalData = computed(() => store.state.personalData)
+const children = computed(() => store.state.childrenData)
 
 if (localStorage.getItem('personal_data') && localStorage.getItem('children_data')) {
-    personalData.value = JSON.parse(localStorage.getItem('personal_data'))
-    children.value = JSON.parse(localStorage.getItem('children_data'))
+    store.dispatch('getPersonalData')
 }
 
 </script>
